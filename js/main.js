@@ -61,6 +61,12 @@
     return day !== 0 && day !== 6;
   }
 
+  function getToday() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return today;
+  }
+
   function nextWorkday(date) {
     const result = new Date(date);
     while (!isWorkday(result)) result.setDate(result.getDate() + 1);
@@ -68,9 +74,8 @@
   }
 
   function getMonthOptions() {
-    const start = nextWorkday(new Date());
-    start.setHours(0, 0, 0, 0);
-    const firstMonth = new Date(start.getFullYear(), start.getMonth(), 1);
+    const today = getToday();
+    const firstMonth = new Date(today.getFullYear(), today.getMonth(), 1);
     return Array.from({ length: 4 }, (_, index) => {
       const date = new Date(firstMonth.getFullYear(), firstMonth.getMonth() + index, 1);
       return {
@@ -83,8 +88,7 @@
   function getWorkdays(monthKey) {
     if (!monthKey) return [];
     const [year, month] = monthKey.split("-").map(Number);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = getToday();
     const start = new Date(year, month - 1, 1);
     const end = new Date(year, month, 0);
     const days = [];
@@ -104,6 +108,26 @@
     }
 
     return days;
+  }
+
+  function getDefaultWorkday(monthKey, days) {
+    if (!days.length) return "";
+    const today = getToday();
+    const currentMonth = toMonthKey(today);
+
+    if (monthKey === currentMonth) {
+      const todayKey = toDateKey(today);
+      if (isWorkday(today) && days.some((day) => day.value === todayKey)) {
+        return todayKey;
+      }
+
+      const nextWorkdayKey = toDateKey(nextWorkday(today));
+      if (days.some((day) => day.value === nextWorkdayKey)) {
+        return nextWorkdayKey;
+      }
+    }
+
+    return days[0].value;
   }
 
   function setOptions(select, placeholderKey, options, selectedValue) {
@@ -129,11 +153,16 @@
   function renderAppointmentPicker(selection = {}) {
     if (!appointmentMonth || !appointmentDay || !appointmentTime) return;
     const months = getMonthOptions();
-    const selectedMonth = selection.selectedMonth ?? appointmentMonth.value;
+    const currentMonth = toMonthKey(getToday());
+    const selectedMonth = (selection.selectedMonth ?? appointmentMonth.value) || currentMonth;
     setOptions(appointmentMonth, "form.monthPlaceholder", months, selectedMonth);
 
     const days = getWorkdays(appointmentMonth.value);
-    setOptions(appointmentDay, "form.dayPlaceholder", days, selection.selectedDay || appointmentDay.value);
+    const preferredDay = selection.selectedDay ?? appointmentDay.value;
+    const selectedDay = days.some((day) => day.value === preferredDay)
+      ? preferredDay
+      : getDefaultWorkday(appointmentMonth.value, days);
+    setOptions(appointmentDay, "form.dayPlaceholder", days, selectedDay);
 
     const times = appointmentTimes.map((time) => ({ value: time, label: time }));
     setOptions(appointmentTime, "form.timePlaceholder", appointmentDay.value ? times : [], selection.selectedTime || appointmentTime.value);
