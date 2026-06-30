@@ -236,22 +236,18 @@
             <fieldset class="appointment-picker" data-appointment-picker>
               <legend data-i18n="form.slotLegend">Freien Termin waehlen</legend>
               <p data-i18n="form.slotNote">Vorlaeufige Auswahl - wir bestaetigen den Termin telefonisch oder per E-Mail.</p>
-              <div class="slot-grid">
-                <label class="slot-option">
-                  <input type="radio" name="appointment" value="Mi, 01.07.2026, 09:30" required>
-                  <span><strong data-i18n="form.slots.0.date">Mi, 01.07.</strong><small>09:30</small><em data-i18n="form.slotFree">frei</em></span>
+              <div class="appointment-fields">
+                <label>
+                  <span data-i18n="form.month">Monat</span>
+                  <select name="appointmentMonth" required data-appointment-month></select>
                 </label>
-                <label class="slot-option">
-                  <input type="radio" name="appointment" value="Do, 02.07.2026, 11:00" required>
-                  <span><strong data-i18n="form.slots.1.date">Do, 02.07.</strong><small>11:00</small><em data-i18n="form.slotFree">frei</em></span>
+                <label>
+                  <span data-i18n="form.day">Arbeitstag</span>
+                  <select name="appointmentDay" required data-appointment-day></select>
                 </label>
-                <label class="slot-option">
-                  <input type="radio" name="appointment" value="Fr, 03.07.2026, 13:30" required>
-                  <span><strong data-i18n="form.slots.2.date">Fr, 03.07.</strong><small>13:30</small><em data-i18n="form.slotFree">frei</em></span>
-                </label>
-                <label class="slot-option">
-                  <input type="radio" name="appointment" value="Mo, 06.07.2026, 16:00" required>
-                  <span><strong data-i18n="form.slots.3.date">Mo, 06.07.</strong><small>16:00</small><em data-i18n="form.slotFree">frei</em></span>
+                <label>
+                  <span data-i18n="form.time">Uhrzeit</span>
+                  <select name="appointmentTime" required data-appointment-time></select>
                 </label>
               </div>
             </fieldset>

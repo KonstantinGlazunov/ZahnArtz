@@ -657,72 +657,30 @@ address {
   font-size: 0.94rem;
 }
 
-.slot-grid {
+.appointment-fields {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
 }
 
-.slot-option {
+.appointment-fields label {
+  display: grid;
+  gap: 7px;
+}
+
+.contact-form select {
+  width: 100%;
+  min-height: 48px;
+  border: 1px solid #cdd5d0;
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  padding: 0.75rem 0.85rem;
   cursor: pointer;
 }
 
-.slot-option input {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.slot-option span {
-  min-height: 96px;
-  display: grid;
-  gap: 3px;
-  padding: 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: #f9faf7;
-  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
-}
-
-.slot-option strong {
-  color: var(--ink);
-  font-size: 0.98rem;
-}
-
-.slot-option small {
-  color: var(--green-dark);
-  font-size: 1.3rem;
-  font-weight: 850;
-}
-
-.slot-option em {
-  width: fit-content;
-  min-height: 24px;
-  display: inline-flex;
-  align-items: center;
-  padding: 0.1rem 0.55rem;
-  border-radius: 999px;
-  background: #e3ebe4;
-  color: var(--green-dark);
-  font-size: 0.82rem;
-  font-style: normal;
-  font-weight: 800;
-}
-
-.slot-option input:focus-visible + span {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
-}
-
-.slot-option input:checked + span {
-  border-color: var(--green-dark);
-  background: #edf4ef;
-  box-shadow: 0 0 0 3px rgba(51, 89, 79, 0.12);
-}
-
-.contact-form .is-invalid {
+.contact-form .is-invalid,
+.contact-form select.is-invalid {
   border-color: #9f3d35;
   box-shadow: 0 0 0 3px rgba(159, 61, 53, 0.12);
 }
@@ -934,7 +892,7 @@ address {
     padding: 20px;
   }
 
-  .slot-grid {
+  .appointment-fields {
     grid-template-columns: 1fr;
   }
 }
