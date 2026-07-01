@@ -281,6 +281,7 @@ textarea {
 .hero-media img {
   width: 100%;
   height: 100%;
+  object-position: center right;
 }
 
 .hero::after {
@@ -298,7 +299,7 @@ textarea {
 }
 
 .hero-copy {
-  max-width: 780px;
+  max-width: 650px;
 }
 
 .eyebrow {
@@ -323,7 +324,7 @@ p {
 
 h1 {
   margin: 0;
-  max-width: 840px;
+  max-width: 690px;
   font-size: clamp(2.45rem, 6vw, 5.2rem);
   line-height: 0.98;
   letter-spacing: 0;
@@ -343,7 +344,7 @@ h3 {
 }
 
 .hero-subtitle {
-  max-width: 690px;
+  max-width: 620px;
   margin: 24px 0 0;
   color: rgba(255, 255, 255, 0.9);
   font-size: clamp(1.05rem, 2vw, 1.28rem);
@@ -359,9 +360,9 @@ h3 {
 
 .trust-strip {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
-  max-width: 980px;
+  max-width: 650px;
   border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: var(--radius);
   overflow: hidden;
@@ -838,14 +839,41 @@ address {
   }
 
   .hero {
-    min-height: 760px;
-    padding: 118px 0 32px;
-    align-items: center;
+    display: block;
+    min-height: auto;
+    padding: var(--header-height) 0 40px;
+    overflow: visible;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  .hero-media {
+    position: relative;
+    inset: auto;
+    z-index: 0;
+    height: clamp(340px, 58vh, 500px);
+    margin-bottom: 30px;
+    background: #e7ece8;
+  }
+
+  .hero-media img {
+    object-position: 70% center;
   }
 
   .hero::after {
-    background: linear-gradient(90deg, rgba(30, 42, 40, 0.88), rgba(30, 42, 40, 0.62)),
-      linear-gradient(0deg, rgba(30, 42, 40, 0.36), rgba(30, 42, 40, 0.12));
+    display: none;
+  }
+
+  .hero-grid {
+    gap: 28px;
+  }
+
+  .hero .eyebrow {
+    color: var(--green-dark);
+  }
+
+  .hero-subtitle {
+    color: var(--muted);
   }
 
   .hero-actions,
@@ -867,8 +895,16 @@ address {
     grid-template-columns: 1fr;
   }
 
+  .trust-strip {
+    border-color: var(--line);
+    background: var(--surface);
+    backdrop-filter: none;
+  }
+
   .trust-strip span {
     min-height: 60px;
+    background: var(--surface);
+    color: var(--ink);
   }
 
   .image-stack {
